@@ -2,6 +2,7 @@ package com.example.DronAgronomo.Models;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -45,5 +46,17 @@ public class Usuario {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "usuario")
     @JsonManagedReference(value = "usuario-roles")
-    private java.util.Set<UsuarioRol> usuarioRoles = new HashSet<>();
+    private Set<UsuarioRol> usuarioRoles = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+    @JsonManagedReference(value = "usuario-zonas")
+    private Set<EstadoZona> estadoZonas= new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+    @JsonManagedReference(value="usuario-notificaciones")
+    private Set<Notificacion> notificacions = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "usuario")
+    @JsonManagedReference(value="usuario-notificaciones")
+    private Set<Tareas> tareas = new HashSet<>();
 }

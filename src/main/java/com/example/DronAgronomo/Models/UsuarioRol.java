@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,6 +42,8 @@ public class UsuarioRol {
     @JsonBackReference
     private Rol rol;
 
+    @Column(name = "fecha_asignacion", nullable = false)
     private LocalDate fechaAsignacion;
+    @Column(name = "activo", nullable = false)
     private Boolean activo = true;
 }

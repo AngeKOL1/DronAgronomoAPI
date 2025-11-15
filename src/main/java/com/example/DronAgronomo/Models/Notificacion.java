@@ -2,11 +2,15 @@ package com.example.DronAgronomo.Models;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,4 +36,14 @@ public class Notificacion {
     private LocalDate fechaEnvio;
     @Column(name="leido", nullable=false)
     private Boolean leido;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference(value = "usuario-notificacion")
+    private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "tareas_id", nullable = false)
+    @JsonBackReference(value = "tareas-notificaciones")
+    private  Tareas tareas;
 }

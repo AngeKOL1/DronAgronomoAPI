@@ -1,10 +1,8 @@
 package com.example.DronAgronomo.Security;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -17,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import lombok.RequiredArgsConstructor;
 
 
 @Configuration
@@ -50,19 +50,7 @@ public class WebSecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAuthority("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/transacciones/**").hasAuthority("USUARIO")
-                        .requestMatchers(HttpMethod.POST, "/transacciones/**").hasAuthority("USUARIO")
-                        .requestMatchers(HttpMethod.POST, "/metas/*/metas/**").hasAuthority("USUARIO")
-                        .requestMatchers(HttpMethod.GET, "/metas/**").hasAuthority("USUARIO")
-                        .requestMatchers(HttpMethod.POST, "/usuarios/registro").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/meta/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/meta/misMetas/").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/niveles/**").authenticated()
-                        .requestMatchers(HttpMethod.GET, "/trofeos/**").authenticated()
-                        .requestMatchers("/usuarios/**").authenticated()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
                 .exceptionHandling(e -> e.authenticationEntryPoint(jwtAuthenticationEntryPoint));
