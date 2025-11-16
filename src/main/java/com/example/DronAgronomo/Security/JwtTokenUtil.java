@@ -1,15 +1,5 @@
 package com.example.DronAgronomo.Security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-
-import javax.crypto.SecretKey;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
@@ -17,6 +7,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtTokenUtil implements Serializable {
@@ -94,7 +96,7 @@ public class JwtTokenUtil implements Serializable {
         return claimsResolver.apply(claims);
     }
 
-    // 🧑 Obtiene el username (correo)
+    // 🧑 Obtiene el username (email)
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
@@ -113,9 +115,9 @@ public class JwtTokenUtil implements Serializable {
     // ✅ Valida que el token sea correcto
     public boolean validateToken(String token, UserDetails userDetails) {
         try {
-            final String correo = getUsernameFromToken(token);
-            return (correo != null &&
-                    correo.equalsIgnoreCase(userDetails.getUsername()) &&
+            final String email = getUsernameFromToken(token);
+            return (email != null &&
+                    email.equalsIgnoreCase(userDetails.getUsername()) &&
                     !isTokenExpired(token));
         } catch (Exception ex) {
             return false;

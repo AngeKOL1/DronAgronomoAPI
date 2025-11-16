@@ -14,5 +14,5 @@ public interface  UsuarioRepo extends GenericRepo<Usuario, Integer> {
             "LEFT JOIN FETCH u.usuarioRoles ur " +
             "LEFT JOIN FETCH ur.rol " +
             "WHERE u.email = :email")
-    Optional<Usuario> findByEmailFetchRoles(@Param("correo") String email);
+    Optional<Usuario> findByEmailFetchRoles(@Param("email") String email);
 }

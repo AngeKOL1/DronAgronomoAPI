@@ -16,7 +16,7 @@ import com.example.DronAgronomo.service.ILecturaDronService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/lecturas-dron")
+@RequestMapping("/dron")
 @RequiredArgsConstructor
 @CrossOrigin(origins = "*")
 public class LecturaDronController {

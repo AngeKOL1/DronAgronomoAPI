@@ -30,10 +30,10 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest req) throws Exception {
-        authenticate(req.getCorreo(), req.getPassword());
+        authenticate(req.getEmail(), req.getPassword());
 
-        final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(req.getCorreo());
-        Usuario usuario = usuarioRepo.findByEmail(req.getCorreo())
+        final UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(req.getEmail());
+        Usuario usuario = usuarioRepo.findByEmail(req.getEmail())
                 .orElseThrow(() -> new Exception("Usuario no encontrado"));
         final String token = jwtTokenUtil.generateToken(userDetails, usuario.getIdUser());
 

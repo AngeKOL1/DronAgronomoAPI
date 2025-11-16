@@ -53,8 +53,9 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/login").permitAll()
                         .requestMatchers(HttpMethod.GET, "/usuarios/**").hasAuthority("ADMINISTRADOR")
-                        .requestMatchers(HttpMethod.GET, "/usuarios/registro").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/usuarios/registro").permitAll()
                         .requestMatchers(HttpMethod.POST, "/zonas/registro-zonas").hasAuthority("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.POST, "/dron/lecturas-dron").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)

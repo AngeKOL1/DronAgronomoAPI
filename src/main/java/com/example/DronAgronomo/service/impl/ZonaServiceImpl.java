@@ -67,7 +67,7 @@ public class ZonaServiceImpl extends GenericServiceImpl<Zonas, Integer> implemen
         zona.setLongitud(dto.getLongitud());
         zona.setEstado(dto.getEstado());
 
-        // Set vacíos para evitar null pointers en relaciones
+
         zona.setPlantas(new java.util.HashSet<>());
         zona.setLecturas(new java.util.HashSet<>());
         zona.setTareas(new java.util.HashSet<>());
