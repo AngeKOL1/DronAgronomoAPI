@@ -40,7 +40,7 @@ public class LecturasDron {
     private BigDecimal temperaturaAire;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
+    @JoinColumn(name = "zona_id", nullable = false)
     @JsonBackReference(value = "zonas-dronLecturas")
     private Zonas zonas;
 }
