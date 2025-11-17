@@ -62,6 +62,8 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/dron/**").hasAuthority("ADMINISTRADOR")
                         .requestMatchers(HttpMethod.GET, "/dron/*").hasAuthority("ADMINISTRADOR")
                         .requestMatchers(HttpMethod.GET, "/tipo-equipos/buscar-por-rango-temperatura").hasAuthority("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.POST, "/tareas/crear").hasAuthority("ADMINISTRADOR")
+                        .requestMatchers(HttpMethod.PUT, "/tareas/{id}/estado").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
