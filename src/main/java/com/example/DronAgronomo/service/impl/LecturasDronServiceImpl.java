@@ -71,9 +71,14 @@ public class LecturasDronServiceImpl extends GenericServiceImpl<LecturasDron, In
     }
 
     private BigDecimal validarRango(BigDecimal valor, BigDecimal min, BigDecimal max) {
-        if (valor == null) return null;
-        if (valor.compareTo(min) < 0) return null;
-        if (valor.compareTo(max) > 0) return null;
+
+        if (valor == null) return new BigDecimal("0.00");
+
+        if (valor.compareTo(min) < 0) return new BigDecimal("0.00");
+
+        if (valor.compareTo(max) > 0) return new BigDecimal("0.00");
+
         return valor;
     }
+
 }
