@@ -1,5 +1,6 @@
 package com.example.DronAgronomo.Models;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,25 +24,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="equipos")
+@Table(name = "tipo_equipo")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Equipos {
+public class TipoEquipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private Integer idEquipo;
-    @Column(name="name", nullable=false)
-    private String name;
-    @Column(name="description", nullable=false)
-    private String description;
-    @Column(name="img", nullable=false)
-    private String img;
+    private Integer idTipoEquipo;
+    @Column(name ="nombre", nullable = false, unique = true, length = 50)
+    private String nombre; 
+    @Column(name ="descripcion", nullable = false, unique = true, length = 200)
+    private String descripcion;
+    @Column(name ="max-temp", nullable = false)
+    private BigDecimal maxTemp;
+    @Column(name ="min-temp", nullable = false)
+    private BigDecimal minTemp;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "equipos")
-    @JsonManagedReference(value = "usuario-equipo")
-    private Set<TareasEquipo> tareasEquipo = new HashSet<>();
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "equipos")
-    @JsonManagedReference(value = "tipo-equipo-relation")
-    private Set<TipoEquipoRelation> relations = new HashSet<>();
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "tipoEquipo")
+    @JsonManagedReference(value = "tipoEquipo")
+    private Set<TipoEquipoRelation> relation = new HashSet<>();
 }
