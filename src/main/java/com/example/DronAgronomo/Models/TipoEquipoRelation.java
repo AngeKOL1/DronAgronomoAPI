@@ -13,26 +13,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tipo_equipo-relation")
+@Table(name = "tipo_equipo_relation")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TipoEquipoRelation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer idTipoEquipoRelation;
 
     @ManyToOne
-    @JoinColumn(name = "tipo-equipo", nullable = false)
-    @JsonBackReference(value = "equipo-tipo-equipo")
-    private Equipos equipos;
+    @JoinColumn(name = "equipo_id", nullable = false)
+    @JsonBackReference(value = "equipo-tipoRelation")
+    private Equipos equipo;
 
     @ManyToOne
-    @JoinColumn(name = "tipo-equipo-relations", nullable = false)
-    @JsonBackReference(value = "equipo-tipo-equipo-relations")
+    @JoinColumn(name = "tipo_equipo_id", nullable = false)
+    @JsonBackReference(value = "tipoEquipo-relation")
     private TipoEquipo tipoEquipo;
-
 }

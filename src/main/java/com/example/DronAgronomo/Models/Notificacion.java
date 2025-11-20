@@ -21,29 +21,34 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="notificaciones")
+@Table(name = "notificaciones")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Notificacion {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer idNotificacion;
-    @Column(name="titulo", nullable=false, length=100)
+
+    @Column(nullable = false, length = 100)
     private String titulo;
-    @Column(name="mensaje", nullable=false, length=200)
+
+    @Column(nullable = false, length = 200)
     private String mensaje;
-    @Column(name="fecha_envio", nullable=false)
+
+    @Column(nullable = false)
     private LocalDate fechaEnvio;
-    @Column(name="leido", nullable=false)
+
+    @Column(nullable = false)
     private Boolean leido;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonBackReference(value = "usuario-notificacion")
+    @JsonBackReference(value = "usuario-notificaciones")
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "tareas_id", nullable = false)
-    @JsonBackReference(value = "tareas-notificaciones")
-    private  Tareas tareas;
+    @JoinColumn(name = "tarea_id", nullable = false)
+    @JsonBackReference(value = "tarea-notificaciones")
+    private Tareas tarea;
 }

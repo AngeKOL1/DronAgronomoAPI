@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.DronAgronomo.DTO.LecturasDronDTO;
 import com.example.DronAgronomo.Models.LecturasDron;
+import com.example.DronAgronomo.repo.ZonasRepo;
 import com.example.DronAgronomo.service.ILecturaDronService;
 
 import lombok.RequiredArgsConstructor;
@@ -64,4 +65,8 @@ public class LecturaDronController {
                     .body(Map.of("error", e.getMessage()));
         }
     }
+
+    
+
+
 }

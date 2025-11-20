@@ -19,29 +19,34 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="equipos")
+@Table(name = "equipos")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Equipos {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer idEquipo;
-    @Column(name="name", nullable=false)
+
+    @Column(nullable = false, length = 100)
     private String name;
-    @Column(name="description", nullable=false)
+
+    @Column(nullable = false, length = 200)
     private String description;
-    @Column(name="img", nullable=false)
+
+    @Column(nullable = false)
     private String img;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "equipos")
-    @JsonManagedReference(value = "usuario-equipo")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "equipo")
+    @JsonManagedReference(value = "equipo-tareasEquipo")
     private Set<TareasEquipo> tareasEquipo = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "equipos")
-    @JsonManagedReference(value = "tipo-equipo-relation")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "equipo")
+    @JsonManagedReference(value = "equipo-tipoRelation")
     private Set<TipoEquipoRelation> relations = new HashSet<>();
 }

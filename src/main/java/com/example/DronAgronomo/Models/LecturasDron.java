@@ -17,6 +17,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,23 +25,29 @@ import lombok.NoArgsConstructor;
 @Table(name="lecturas_dron")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class LecturasDron {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer idLectura;
-    @Column(name = "humedad_suelo", precision = 5, scale = 2)
+
+    @Column(precision = 5, scale = 2)
     private BigDecimal humedadSuelo;
-    @Column(name = "humedad_aire", precision = 5, scale = 2)
+
+    @Column(precision = 5, scale = 2)
     private BigDecimal humedadAire;
-    @Column(name="ph_suelo", precision = 5, scale = 2)
+
+    @Column(precision = 5, scale = 2)
     private BigDecimal phSuelo;
-    @Column(name="temperatura_suelo", precision = 5, scale = 2)
+
+    @Column(precision = 5, scale = 2)
     private BigDecimal temperaturaSuelo;
-    @Column(name="temperatura_aire", precision = 5, scale = 2)
+
+    @Column(precision = 5, scale = 2)
     private BigDecimal temperaturaAire;
 
     @ManyToOne
     @JoinColumn(name = "zona_id", nullable = false)
-    @JsonBackReference(value = "zonas-dronLecturas")
-    private Zonas zonas;
+    @JsonBackReference(value = "zona-lecturas")
+    private Zonas zona;
 }

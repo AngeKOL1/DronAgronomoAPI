@@ -44,4 +44,9 @@ public class UsuarioController {
             return ResponseEntity.internalServerError().body(Map.of("error", e.getMessage()));
         }
     }
+
+     @GetMapping("/trabajadores")
+    public ResponseEntity<?> listarTrabajadores() {
+        return ResponseEntity.ok(usuarioService.listarTrabajadores());
+    }
 }

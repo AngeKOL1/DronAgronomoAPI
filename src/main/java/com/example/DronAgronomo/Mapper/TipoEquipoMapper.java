@@ -37,7 +37,7 @@ public class TipoEquipoMapper {
     private static TipoEquipoRelationDTO toRelationDTO(TipoEquipoRelation entity) {
         TipoEquipoRelationDTO dto = new TipoEquipoRelationDTO();
         dto.setIdTipoEquipoRelation(entity.getIdTipoEquipoRelation());
-        dto.setEquipo(toEquipoDTO(entity.getEquipos())); // objeto completo
+        dto.setEquipo(toEquipoDTO(entity.getEquipo())); // objeto completo
         return dto;
     }
 

@@ -63,7 +63,7 @@ public class LecturasDronServiceImpl extends GenericServiceImpl<LecturasDron, In
                          new BigDecimal("60.00"))
         );
 
-        lectura.setZonas(zona);
+        lectura.setZona(zona);
 
         lecturasDronRepo.save(lectura);
 

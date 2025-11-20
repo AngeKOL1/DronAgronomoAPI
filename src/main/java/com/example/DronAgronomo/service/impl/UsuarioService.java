@@ -2,6 +2,7 @@ package com.example.DronAgronomo.service.impl;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -68,7 +69,7 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
         if (usuario.getEstadoZonas() == null) usuario.setEstadoZonas(new HashSet<>());
         if (usuario.getNotificacions() == null) usuario.setNotificacions(new HashSet<>());
         if (usuario.getTareas() == null) usuario.setTareas(new HashSet<>());
-        Rol rolUsuario = rolRepo.findByName("ADMINISTRADOR")
+        Rol rolUsuario = rolRepo.findByName("TRABAJADOR")
                 .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
 
         UsuarioRol usuarioRol = new UsuarioRol();
@@ -82,4 +83,8 @@ public class UsuarioService extends GenericServiceImpl<Usuario, Integer> impleme
         return usuarioRepo.save(usuario);
     }
 
+     @Override
+    public List<Usuario> listarTrabajadores() {
+        return usuarioRepo.findByRolId(2); // Rol TRABAJADOR
+    }
 }

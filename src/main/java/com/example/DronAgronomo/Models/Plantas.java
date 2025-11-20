@@ -17,6 +17,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,21 +26,26 @@ import lombok.NoArgsConstructor;
 @Table(name="plantas")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Plantas {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer idPlanta;
-    @Column(name="nombre_comun", nullable=false)
+
+    @Column(nullable=false)
     private String nombreComun;
-    @Column(name="nombre_cientifico", nullable=false)
+
+    @Column(nullable=false)
     private String nombreCientifico;
-    @Column(name="latitud", precision = 10, scale = 7)
+
+    @Column(precision = 10, scale = 7)
     private BigDecimal latitud;
-    @Column(name="longitud", precision = 10, scale = 7)
+
+    @Column(precision = 10, scale = 7)
     private BigDecimal longitud;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonBackReference(value = "zonas-plantas")
-    private Zonas zonas;
+    @JoinColumn(name = "zona_id", nullable = false)
+    @JsonBackReference(value = "zona-plantas")
+    private Zonas zona;
 }

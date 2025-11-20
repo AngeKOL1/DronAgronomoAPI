@@ -27,20 +27,25 @@ import lombok.NoArgsConstructor;
 @Table(name = "tipo_equipo")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class TipoEquipo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer idTipoEquipo;
-    @Column(name ="nombre", nullable = false, unique = true, length = 50)
-    private String nombre; 
-    @Column(name ="descripcion", nullable = false, unique = true, length = 200)
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String nombre;
+
+    @Column(nullable = false, length = 200)
     private String descripcion;
-    @Column(name ="max-temp", nullable = false)
+
+    @Column(name ="max_temp", nullable = false)
     private BigDecimal maxTemp;
-    @Column(name ="min-temp", nullable = false)
+
+    @Column(name ="min_temp", nullable = false)
     private BigDecimal minTemp;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "tipoEquipo")
-    @JsonManagedReference(value = "tipoEquipo")
+    @OneToMany(mappedBy = "tipoEquipo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "tipoEquipo-relation")
     private Set<TipoEquipoRelation> relation = new HashSet<>();
 }

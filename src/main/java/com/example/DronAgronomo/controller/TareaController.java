@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.DronAgronomo.DTO.TareaCreateDTO;
 import com.example.DronAgronomo.DTO.TareaEstadoDTO;
+import com.example.DronAgronomo.DTO.TareaRequest;
 import com.example.DronAgronomo.Models.Tareas;
 import com.example.DronAgronomo.service.ITareaService;
 
@@ -23,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class TareaController {
     private final ITareaService tareaService;
     @PostMapping("/crear")
-    public ResponseEntity<?> crearTarea(@RequestBody TareaCreateDTO dto) throws Exception {
+    public ResponseEntity<?> crearTarea(@RequestBody TareaRequest dto) throws Exception {
         var tarea = tareaService.crearTarea(dto);
         return ResponseEntity.ok(tarea);
     }

@@ -15,6 +15,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -25,25 +26,32 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="tareas")
+@Table(name = "tareas")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Tareas {
+
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Integer idTarea;
-    @Column(name="descripcion", nullable=false, length=200)
+
+    @Column(nullable = false, length = 200)
     private String descripcion;
-    @Column(name="fecha_inicial", nullable=false)
+
+    @Column(name = "fecha_inicial", nullable = false)
     private LocalDate fechaInicial;
-    @Column(name="fecha_final", nullable=false)
+
+    @Column(name = "fecha_final", nullable = false)
     private LocalDate fechaFinal;
+
     @Enumerated(EnumType.STRING)
-    @Column(name="estado", nullable=false, length=20)
+    @Column(nullable = false, length = 20)
     private TareasEnum estado;
 
     @ManyToOne
@@ -52,16 +60,16 @@ public class Tareas {
     private Usuario usuario;
 
     @ManyToOne
-    @JoinColumn(name = "equipo_id", nullable = false)
-    @JsonBackReference(value = "equipo-tareas")
-    private Zonas zonas;
+    @JoinColumn(name = "zona_id", nullable = false)
+    @JsonBackReference(value = "zona-tareas")
+    private Zonas zona;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "tareas")
-    @JsonManagedReference(value = "tareas-equipo")
+    @OneToMany(mappedBy = "tarea", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference(value = "tarea-tareasEquipo")
     private Set<TareasEquipo> tareasEquipo = new HashSet<>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "tareas")
-    @JsonManagedReference(value = "tareas-notificacion")
-    private Set<Notificacion> notificacionesEquipo = new HashSet<>();
-    
+    @OneToMany(mappedBy = "tarea", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference(value="tarea-notificaciones")
+    private Set<Notificacion> notificaciones = new HashSet<>();
 }
+
